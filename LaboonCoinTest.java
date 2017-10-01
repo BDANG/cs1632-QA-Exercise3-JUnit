@@ -62,27 +62,29 @@ public class LaboonCoinTest {
 
     // Ensure that validHash() returns true when the first argument
     // is the number of leading zeros for the second argument
-    // tests a couple of examples for completeness.
+    // tests a happy path
     @Test
-    public void testValidHash() {
-        assertTrue(_l.validHash(3, 0x000fd98a));
-        assertTrue(_l.validHash(3, 0x000fffff));
-        assertTrue(_l.validHash(3, 0x00000000));
-        assertTrue(_l.validHash(3, 0x00000aba));
-
-        assertTrue(_l.validHash(1, 0x0182ba82));
-        assertTrue(_l.validHash(2, 0x00281931));
+    public void testValidHash4() {
         assertTrue(_l.validHash(4, 0x00001111));
-        assertTrue(_l.validHash(5, 0x00000ab0));
     }
 
     // Ensure that validHash() returns false when the first argument
     // is NOT the number of leading zeros for the second argument
-    // tests a couple of examples for completeness
+    // tests an edge case where it is off by one and the first argument = 1
     @Test
-    public void testInvalidHash(){
-        assertFalse(_l.validHash(3, 0x0019ac2b));
+    public void testInvalidHash1(){
+        assertFalse(_l.validHash(1, 0x10000000));
     }
+
+    // Ensure that validHash() returns false when the first argument
+    // is NOT the number of leading zeros for the second argument
+    // tests another edge case where it is off by but the first argument != 1
+    @Test
+    public void testInvalidHash5(){
+        assertFalse(_l.validHash(5, 0x00002fba));
+    }
+
+
 
 
 
