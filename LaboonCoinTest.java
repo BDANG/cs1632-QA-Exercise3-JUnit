@@ -1,3 +1,5 @@
+//Brian Dang and Alex Coroi's LaboonCoinTest.java
+
 import static org.junit.Assert.*;
 
 import org.junit.*;
