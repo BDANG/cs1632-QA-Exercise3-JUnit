@@ -58,7 +58,9 @@ public class LaboonCoinTest {
     assertEquals("TESTBLOCK1|00000000|000010e9|000a3cd8\nTESTBLOCK2|000a3cd8|00002ca8|0008ff30\nTESTBLOCK3|0008ff30|00002171|0009f908\n", blockChain);
     }
 
-    // TODO - PUT YOUR SIX TESTS HERE
+    //----------------------------------------------------------------//
+    //validHash() unit tests
+    //----------------------------------------------------------------//
 
     // Ensure that validHash() returns true when the first argument
     // is the number of leading zeros for the second argument
@@ -84,8 +86,32 @@ public class LaboonCoinTest {
         assertFalse(_l.validHash(5, 0x00002fba));
     }
 
+	//----------------------------------------------------------------//
+	//hash() unit tests
+	//----------------------------------------------------------------//
 
+	//Ensure that hash() returns the correct hash for the given passed
+	//in string. For example, when "bill" is passed in, the hash that is
+	//returned is "0x53c4142c. This is testing a happy path.
+	@Test
+	public void testValidInput() {
+		assertEquals(_l.hash("bill"), 0x53c4142c);
+	}
+	
+	//Ensure that hash() returns 0x00989680 for a null or empty string.
+	//This tests an edge case.
+	@Test
+	public void testNullInput() {
+		assertEquals(_l.hash(""), 0x00989680);
+	}
+	
+	//Ensure that hash() doesn't return 0x00989680 for a string that is
+	//technically "empty" but actually has characters. This tests
+	//an edge case.
 
-
+	@Test
+	public void testSpaceInput() {
+		assertNotEquals(_l.hash("     "), 0x00989680);
+	}
 
 }
